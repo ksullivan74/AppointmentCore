@@ -3,14 +3,15 @@ import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 import { useNavigate } from "react-router-dom";
 import { register } from "../modules/authManager";
 
-export default function Register() {
+const Register = () => {
   const navigate = useNavigate();
 
-  const [firstName, setFirstName] = useState();
-  const [lastName, setLastName] = useState();
-  const [displayName, setDisplayName] = useState();
-  const [email, setEmail] = useState();
-  const [imageLocation, setImageLocation] = useState();
+  const [FirstName, setFirstName] = useState();
+  const [LastName, setLastName] = useState();
+  const [DisplayName, setDisplayName] = useState();
+  const [Email, setEmail] = useState();
+  const [Age, setAge] = useState();
+  const [Dob, setDob] = useState();
   const [password, setPassword] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
 
@@ -20,11 +21,12 @@ export default function Register() {
       alert("Passwords don't match. Do better.");
     } else {
       const userProfile = {
-        firstName,
-        lastName,
-        displayName,
-        imageLocation,
-        email,
+        FirstName,
+        LastName,
+        DisplayName,
+        Email,
+        Age,
+        Dob,
       };
       register(userProfile, password).then(() => navigate("/"));
     }
@@ -66,11 +68,19 @@ export default function Register() {
           />
         </FormGroup>
         <FormGroup>
-          <Label htmlFor="imageLocation">Profile Image URL</Label>
+          <Label for="age">Age</Label>
           <Input
-            id="imageLocation"
+            id="age"
             type="text"
-            onChange={(e) => setImageLocation(e.target.value)}
+            onChange={(e) => setAge(e.target.value)}
+          />
+        </FormGroup>
+        <FormGroup>
+          <Label for="dob">DOB</Label>
+          <Input
+            id="dob"
+            type="date"
+            onChange={(e) => setDob(e.target.value)}
           />
         </FormGroup>
         <FormGroup>
@@ -95,4 +105,6 @@ export default function Register() {
       </fieldset>
     </Form>
   );
-}
+};
+
+export default Register;
