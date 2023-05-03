@@ -30,6 +30,7 @@ namespace Appointment_Core
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<IUserProfileRepository, UserProfileRepository>();
+            services.AddTransient<IAppointmentRepository, AppointmentRepository>();
 
 
             var firebaseProjectId = Configuration.GetValue<string>("FirebaseProjectId");

@@ -19,7 +19,7 @@ export default function Header({ isLoggedIn, userProfile }) {
     <div>
       <Navbar color="dark" dark light expand="md">
         <NavbarBrand tag={RRNavLink} to="/">
-          Tabloid
+          Appointment CORE
         </NavbarBrand>
 
         <NavbarToggler onClick={toggle} />
@@ -34,16 +34,8 @@ export default function Header({ isLoggedIn, userProfile }) {
                   </NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink>Subscribed Posts</NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink tag={RRNavLink} to="/">
-                    My Posts
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink tag={RRNavLink} to="/">
-                    Tags
+                  <NavLink tag={RRNavLink} to="AppointmentList">
+                    Upcoming Appointments
                   </NavLink>
                 </NavItem>
 
