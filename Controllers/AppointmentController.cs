@@ -17,7 +17,7 @@ namespace Appointment_Core.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAllUsers()
+        public IActionResult GetAllAppointments()
         {
             List<Appointment> appointments = _AppointmentRepository.GetAll();
             return Ok(appointments);

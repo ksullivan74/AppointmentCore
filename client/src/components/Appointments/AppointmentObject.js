@@ -11,11 +11,14 @@ const AppointmentObject = ({ appointment }) => {
       <h4>Appointment:</h4>
       <CardBody>
         {/* <Link to={`/AdminUserList/UserDetails/${user.id}`}> */}
-        <p className="text-left px-2">Patient Name: {}</p>
+        <p className="text-left px-2">Patient First Name: {}</p>
+        <p>Patient Last Name: {}</p>
         {/* </Link> */}
         <p className="text-left px-2">Appointment Type: {}</p>
         <p className="text-left px-2">Current Insurance: {}</p>
-        <p className="text-left px-2">Appointment Date: {}</p>
+        <p className="text-left px-2">
+          Appointment Date: {appointment.appointmentDate}
+        </p>
         <p className="text-left px-2">Patient Estimate: {}</p>
         <div>
           <p>User Status:</p>
