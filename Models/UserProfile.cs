@@ -33,7 +33,9 @@ namespace Appointment_Core.Models
 
         public DateTime CreateDate { get; set; }
 
-        public bool IsActive { get; set; }
+        public bool IsDeleted { get; set; }
+        public Decimal YearlyMaxUsed { get; set; }
+        public Decimal DeductibleUsed { get; set; }
 
         public string FullName
         {

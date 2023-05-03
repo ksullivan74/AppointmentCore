@@ -21,6 +21,7 @@ namespace Appointment_Core.Models
         public int UserId { get; set; }
         public UserProfile UserProfile { get; set; }
         public Boolean IsActive { get; set; }
+        public InsuranceType InsuranceType { get; set; }
 
 
 

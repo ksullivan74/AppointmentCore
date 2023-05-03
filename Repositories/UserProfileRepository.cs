@@ -21,8 +21,8 @@ namespace Appointment_Core.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        SELECT Id, FirebaseUserId, FirstName, LastName, Email, Age, Dob, DisplayName, CreateDate, IsActive
-                          FROM [User]
+                        SELECT Id, FirebaseUserId, FirstName, LastName, Email, Age, Dob, DisplayName, CreateDate, IsDeleted
+                          FROM UserProfile
                          WHERE FirebaseUserId = @FirebaseuserId";
 
                     DbUtils.AddParameter(cmd, "@FirebaseUserId", firebaseUserId);
@@ -43,7 +43,7 @@ namespace Appointment_Core.Repositories
                             Dob = DbUtils.GetDateTime(reader, "Dob"),
                             DisplayName = DbUtils.GetString(reader, "DisplayName"),
                             CreateDate = DbUtils.GetDateTime(reader, "CreateDate"),
-                            IsActive = reader.GetBoolean(reader.GetOrdinal("IsActive"))
+                            IsDeleted = reader.GetBoolean(reader.GetOrdinal("IsDeleted"))
                         };
                     }
                     reader.Close();
@@ -61,11 +61,11 @@ namespace Appointment_Core.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"INSERT INTO [User] (FirebaseUserId, FirstName, LastName, DisplayName, 
-                                                                 Email, Age, Dob, CreateDate, IsActive)
+                    cmd.CommandText = @"INSERT INTO UserProfile (FirebaseUserId, FirstName, LastName, DisplayName, 
+                                                                 Email, Age, Dob, CreateDate, IsDeleted)
                                         OUTPUT INSERTED.ID
                                         VALUES (@FirebaseUserId, @FirstName, @LastName, @DisplayName, 
-                                                @Email, @Age,  @Dob, @CreateDate, @IsActive)";
+                                                @Email, @Age,  @Dob, @CreateDate, @IsDeleted)";
                     DbUtils.AddParameter(cmd, "@FirebaseUserId", userProfile.FirebaseUserId);
                     DbUtils.AddParameter(cmd, "@FirstName", userProfile.FirstName);
                     DbUtils.AddParameter(cmd, "@LastName", userProfile.LastName);
@@ -74,7 +74,7 @@ namespace Appointment_Core.Repositories
                     DbUtils.AddParameter(cmd, "@Age", userProfile.Age);
                     DbUtils.AddParameter(cmd, "@Dob", userProfile.Dob);
                     DbUtils.AddParameter(cmd, "@CreateDate", userProfile.CreateDate);
-                    DbUtils.AddParameter(cmd, "@IsActive", userProfile.IsActive);
+                    DbUtils.AddParameter(cmd, "@IsDeleted", userProfile.IsDeleted);
 
                     userProfile.Id = (int)cmd.ExecuteScalar();
                 }
@@ -90,7 +90,7 @@ namespace Appointment_Core.Repositories
                 {
                     cmd.CommandText = @"
                         SELECT *
-                        FROM [User]
+                        FROM UserProfile
                     ";
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
@@ -109,7 +109,7 @@ namespace Appointment_Core.Repositories
                                 Dob = DbUtils.GetDateTime(reader, "Dob"),
                                 DisplayName = DbUtils.GetString(reader, "DisplayName"),
                                 CreateDate = DbUtils.GetDateTime(reader, "CreateDate"),
-                                IsActive = reader.GetBoolean(reader.GetOrdinal("IsActive"))
+                                IsDeleted = reader.GetBoolean(reader.GetOrdinal("IsDeleted"))
                             };
                             users.Add(user);
                         }
@@ -128,8 +128,8 @@ namespace Appointment_Core.Repositories
                 {
                     cmd.CommandText = @"
                        SELECT *
-                            FROM [User]
-                            WHERE [User].Id = @id
+                            FROM UserProfile
+                            WHERE UserProfile.Id = @id
                     ";
                     cmd.Parameters.AddWithValue("@id", id);
 
@@ -149,7 +149,7 @@ namespace Appointment_Core.Repositories
                             Dob = DbUtils.GetDateTime(reader, "Dob"),
                             DisplayName = DbUtils.GetString(reader, "DisplayName"),
                             CreateDate = DbUtils.GetDateTime(reader, "CreateDate"),
-                            IsActive = reader.GetBoolean(reader.GetOrdinal("IsActive"))
+                            IsDeleted = reader.GetBoolean(reader.GetOrdinal("IsDeleted"))
                         };
                     }
                     reader.Close();

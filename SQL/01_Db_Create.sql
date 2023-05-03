@@ -26,10 +26,7 @@ CREATE TABLE [Insurance] (
   [BasicCoveragePercent] DECIMAL(5,2) NOT NULL,
   [MajorCoveragePercent] DECIMAL(5,2) NOT NULL,
   [Deductible] INT NOT NULL,
-  [DeductibleUsed] DECIMAL NOT NULL,
-  [YearlyMaxUsed] DECIMAL NOT NULL,
-  [UserId] INT NOT NULL,
-  [IsActive] BIT NOT NULL
+  [IsDeleted] BIT NOT NULL
 )
 GO
 
@@ -37,7 +34,7 @@ CREATE TABLE [Dentist] (
   [Id] INT PRIMARY KEY IDENTITY(1, 1),
   [Name] VARCHAR(255) NOT NULL,
   [Specialty] VARCHAR(255),
-  [IsActive] BIT NOT NULL
+  [IsDeleted] BIT NOT NULL
 )
 GO
 
@@ -46,12 +43,12 @@ CREATE TABLE [Appointment] (
   [AppointmentDate] DATETIME NOT NULL,
   [AppointmentCost] DECIMAL NOT NULL,
   [DentistId] INT,
-  [UserId] INT NOT NULL,
+  [UserProfileId] INT NOT NULL,
   [IsDeleted] BIT NOT NULL
 )
 GO
 
-CREATE TABLE [User] (
+CREATE TABLE [UserProfile] (
   [Id] INT PRIMARY KEY IDENTITY(1, 1),
   [FirebaseUserId] VARCHAR(255) NOT NULL,
   [FirstName] VARCHAR(255) NOT NULL,
@@ -61,7 +58,9 @@ CREATE TABLE [User] (
   [Dob] DATE NOT NULL,
   [DisplayName] VARCHAR(255) NOT NULL,
   [CreateDate] DATETIME NOT NULL,
-  [IsActive] BIT
+  [IsDeleted] BIT,
+  [YearlyMaxUsed] DECIMAL NOT NULL,
+  [DeductibleUsed] DECIMAL NOT NULL
 )
 GO
 
@@ -79,7 +78,7 @@ CREATE TABLE [InsuranceType] (
 )
 GO
 
-ALTER TABLE [Appointment] ADD FOREIGN KEY ([UserId]) REFERENCES [User] ([Id])
+ALTER TABLE [Appointment] ADD FOREIGN KEY ([UserProfileId]) REFERENCES [UserProfile] ([Id])
 GO
 
 ALTER TABLE [InsuranceAppointment] ADD FOREIGN KEY ([InsuranceTypeId]) REFERENCES [InsuranceType] ([id])
@@ -92,7 +91,4 @@ ALTER TABLE [InsuranceAppointment] ADD FOREIGN KEY ([AppointmentId]) REFERENCES 
 GO
 
 ALTER TABLE [Appointment] ADD FOREIGN KEY ([DentistId]) REFERENCES [Dentist] ([Id])
-GO
-
-ALTER TABLE [Insurance] ADD FOREIGN KEY ([UserId]) REFERENCES [User] ([Id])
 GO
