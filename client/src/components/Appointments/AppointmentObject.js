@@ -71,15 +71,15 @@ const AppointmentObject = ({ appointment }) => {
     <Card>
       <h4>Appointment:</h4>
       <CardBody>
-        {/* <Link to={`/AdminUserList/UserDetails/${user.id}`}> */}
         <p className="text-left px-2">
           Patient Name: {appointment.userProfile.fullName}
         </p>
-        {/* </Link> */}
         <p className="text-left px-2">Current Insurance: {insuranceList}</p>
-        <p className="text-left px-2">
-          Appointment Date: {appointment.appointmentDate}
-        </p>
+        <Link to={`/AppointmentList/AppointmentDetails/${appointment.id}`}>
+          <p className="text-left px-2">
+            Appointment Date: {appointment.appointmentDate}
+          </p>
+        </Link>
         <p className="text-left px-2">
           Patient Estimate: ${" "}
           {calculatePatientCost(

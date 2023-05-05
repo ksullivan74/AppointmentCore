@@ -18,3 +18,20 @@ export const getAllAppointments = () => {
     });
   });
 };
+
+export const getAppointmentDetails = (id) => {
+  return getToken().then((token) => {
+    return fetch(`${baseUrl}/AppointmentDetails/${id}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then((resp) => {
+      if (resp.ok) {
+        return resp.json();
+      } else {
+        throw new Error("An unknown error occurred.");
+      }
+    });
+  });
+};

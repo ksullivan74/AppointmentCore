@@ -5,6 +5,7 @@ import Login from "./Login";
 import Register from "./Register";
 import AppointmetList from "./Appointments/AppointmentList";
 import InsuranceList from "./Insurance/InsuranceList";
+import AppointmentDetails from "./Appointments/AppointmentDetails";
 
 const ApplicationViews = ({ isLoggedIn, userProfile }) => {
   return (
@@ -12,7 +13,18 @@ const ApplicationViews = ({ isLoggedIn, userProfile }) => {
       <Route path="/">
         <Route index element={isLoggedIn ? <Hello /> : <Login />} />
         <Route path="register" element={<Register />} />
-        <Route path="AppointmentList" element={<AppointmetList />} />
+        <Route path="AppointmentList">
+          <Route
+            index
+            element={isLoggedIn ? <AppointmetList /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="AppointmentDetails/:id"
+            element={
+              isLoggedIn ? <AppointmentDetails /> : <Navigate to="/login" />
+            }
+          />
+        </Route>
         <Route path="InsuranceList" element={<InsuranceList />} />
       </Route>
     </Routes>
