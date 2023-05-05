@@ -38,7 +38,11 @@ export default function Header({ isLoggedIn, userProfile }) {
                     Upcoming Appointments
                   </NavLink>
                 </NavItem>
-
+                <NavItem>
+                  <NavLink tag={RRNavLink} to="InsuranceList">
+                    Insurances
+                  </NavLink>
+                </NavItem>
                 {userProfile?.userTypeId === 1 && (
                   <NavItem>
                     <NavLink tag={RRNavLink} to="/">
