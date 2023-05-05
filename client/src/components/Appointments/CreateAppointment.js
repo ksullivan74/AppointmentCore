@@ -38,7 +38,7 @@ const CreateAppointment = () => {
                 <input
                   required
                   id="Appointment Date"
-                  type="date"
+                  type="datetime-local"
                   className="form-control"
                   placeholder="Title"
                   onChange={(event) => {
