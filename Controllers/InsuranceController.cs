@@ -22,5 +22,12 @@ namespace Appointment_Core.Controllers
             List<Insurance> insurances = _insuranceRepository.GetAll();
             return Ok(insurances);
         }
+
+        [HttpGet("Insurance/{id}")]
+        public IActionResult GetInsurance(int id)
+        {
+            Insurance insurance = _insuranceRepository.GetById(id);
+            return Ok(insurance);
+        }
     }
 }

@@ -6,5 +6,6 @@ namespace Appointment_Core.Repositories
     public interface IInsuranceRepository
     {
         List<Insurance> GetAll();
+        Insurance GetById(int id);
     }
 }
