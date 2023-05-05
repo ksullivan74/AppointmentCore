@@ -35,3 +35,16 @@ export const getAppointmentDetails = (id) => {
     });
   });
 };
+
+export const addAppointment = (appointment) => {
+  return getToken().then((token) =>
+    fetch(baseUrl, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(appointment),
+    }).then((resp) => resp.json())
+  );
+};
