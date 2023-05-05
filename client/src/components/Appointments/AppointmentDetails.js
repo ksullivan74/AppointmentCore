@@ -12,8 +12,6 @@ const AppointmentDetails = () => {
     getAppointmentDetails(parseInt(id)).then(setAppointment);
   }, []);
 
-  console.log(appointment);
-
   return (
     <div>
       <h3>Patient Full Name: {appointment?.userProfile?.fullName}</h3>

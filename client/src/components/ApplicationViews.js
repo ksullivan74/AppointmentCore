@@ -17,25 +17,21 @@ const ApplicationViews = ({ isLoggedIn, userProfile }) => {
         <Route path="AppointmentList">
           <Route
             index
-            element={isLoggedIn ? <AppointmetList /> : <Navigate to="/login" />}
+            element={isLoggedIn ? <AppointmetList /> : <Navigate to="/" />}
           />
           <Route
             path="AppointmentDetails/:id"
-            element={
-              isLoggedIn ? <AppointmentDetails /> : <Navigate to="/login" />
-            }
+            element={isLoggedIn ? <AppointmentDetails /> : <Navigate to="/" />}
           />
         </Route>
         <Route path="InsuranceList">
           <Route
             index
-            element={isLoggedIn ? <InsuranceList /> : <Navigate to="/login" />}
+            element={isLoggedIn ? <InsuranceList /> : <Navigate to="/" />}
           />
           <Route
             path="InsuranceDetails/:id"
-            element={
-              isLoggedIn ? <InsuranceDetails /> : <Navigate to="/login" />
-            }
+            element={isLoggedIn ? <InsuranceDetails /> : <Navigate to="/" />}
           />
         </Route>
       </Route>

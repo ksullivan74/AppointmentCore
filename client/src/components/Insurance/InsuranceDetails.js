@@ -12,8 +12,6 @@ const InsuranceDetails = () => {
     getInsurancesDetails(parseInt(id)).then(setInsurance);
   }, []);
 
-  console.log(insurance);
-
   return (
     <div>
       <h3>Insurance: {insurance?.insuranceName}</h3>

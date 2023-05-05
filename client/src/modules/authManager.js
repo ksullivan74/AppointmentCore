@@ -1,7 +1,7 @@
 import firebase from "firebase/app";
 import "firebase/auth";
 
-const _apiUrl = "/api/userProfile";
+const _apiUrl = "http://localhost:3000/api/userProfile";
 
 export const getFirebaseId = () => firebase.auth().currentUser.user.uid;
 

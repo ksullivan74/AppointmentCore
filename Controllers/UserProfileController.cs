@@ -38,7 +38,9 @@ namespace Appointment_Core.Controllers
         public IActionResult Post(UserProfile userProfile)
         {
             userProfile.CreateDate = DateTime.Now;
-            userProfile.IsDeleted = true;
+            userProfile.IsDeleted = false;
+            userProfile.YearlyMaxUsed = 0;
+            userProfile.DeductibleUsed = 0;
             _userProfileRepository.Add(userProfile);
             return CreatedAtAction(
                 nameof(GetUserProfile),

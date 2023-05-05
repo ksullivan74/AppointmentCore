@@ -61,11 +61,11 @@ namespace Appointment_Core.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"INSERT INTO UserProfile (FirebaseUserId, FirstName, LastName, DisplayName, 
-                                                                 Email, Age, Dob, CreateDate, IsDeleted)
-                                        OUTPUT INSERTED.ID
-                                        VALUES (@FirebaseUserId, @FirstName, @LastName, @DisplayName, 
-                                                @Email, @Age,  @Dob, @CreateDate, @IsDeleted)";
+                    cmd.CommandText = @"INSERT INTO UserProfile (FirebaseUserId, FirstName, LastName, DisplayName, Email, Age, Dob, CreateDate, IsDeleted, YearlyMaxUsed, DeductibleUsed)
+                        OUTPUT INSERTED.ID
+                        VALUES (@FirebaseUserId, @FirstName, @LastName, @DisplayName, 
+                                @Email, @Age,  @Dob, @CreateDate, @IsDeleted, @YearlyMaxUsed, @DeductibleUsed)";
+
                     DbUtils.AddParameter(cmd, "@FirebaseUserId", userProfile.FirebaseUserId);
                     DbUtils.AddParameter(cmd, "@FirstName", userProfile.FirstName);
                     DbUtils.AddParameter(cmd, "@LastName", userProfile.LastName);
@@ -75,6 +75,8 @@ namespace Appointment_Core.Repositories
                     DbUtils.AddParameter(cmd, "@Dob", userProfile.Dob);
                     DbUtils.AddParameter(cmd, "@CreateDate", userProfile.CreateDate);
                     DbUtils.AddParameter(cmd, "@IsDeleted", userProfile.IsDeleted);
+                    DbUtils.AddParameter(cmd, "@YearlyMaxUsed", userProfile.YearlyMaxUsed);
+                    DbUtils.AddParameter(cmd, "@DeductibleUsed", userProfile.DeductibleUsed);
 
                     userProfile.Id = (int)cmd.ExecuteScalar();
                 }
