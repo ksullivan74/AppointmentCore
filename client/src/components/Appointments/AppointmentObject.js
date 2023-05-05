@@ -14,17 +14,6 @@ const AppointmentObject = ({ appointment }) => {
     }
   });
 
-  // const deductible = appointment.insurances.map((insurance) => {
-  //   let deductibleamount = 0;
-  //   if (insurance.insuranceType.type == "Primary") {
-  //     deductibleamount = insurance.deductible;
-  //   } else {
-  //     deductibleamount = deductibleamount;
-  //   }
-  //   return deductibleamount;
-  //   //console.log(insurance);
-  // });
-
   const deductible = appointment.insurances.reduce(
     (totalDeductible, insurance) => {
       if (insurance.insuranceType.type === "Primary") {
@@ -35,14 +24,6 @@ const AppointmentObject = ({ appointment }) => {
     0
   );
 
-  // const coveragePercent = appointment.insurances.map((insurance) => {
-  //   let coveragePercentAmount = 0;
-  //   if (insurance.insuranceType.type == "Primary") {
-  //     coveragePercentAmount = insurance.preventativeCoveragePercent;
-  //     return coveragePercentAmount;
-  //   }
-  // });
-
   const coveragePercent = appointment.insurances.reduce(
     (percent, insurance) => {
       if (insurance.insuranceType.type === "Primary") {
@@ -52,14 +33,6 @@ const AppointmentObject = ({ appointment }) => {
     },
     0
   );
-
-  // const yearlyMax = appointment.insurances.map((insurance) => {
-  //   let yearlyMaxAmount = 0;
-  //   if (insurance.insuranceType.type == "Primary") {
-  //     yearlyMaxAmount = insurance.yearlyMax;
-  //   }
-  //   return yearlyMaxAmount;
-  // });
 
   const yearlyMax = appointment.insurances.reduce((max, insurance) => {
     if (insurance.insuranceType.type === "Primary") {
