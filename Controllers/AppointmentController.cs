@@ -26,7 +26,7 @@ namespace Appointment_Core.Controllers
             return Ok(appointments);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("AppointmentDetails/{id}")]
         public IActionResult GetAppointment(int id) {
 
             var appointment = _AppointmentRepository.GetById(id);

@@ -99,7 +99,7 @@ namespace Appointment_Core.Repositories
                 }
             }
         }
-        public List<Appointment> GetById(int id)
+        public Appointment GetById(int id)
         {
             using (SqlConnection conn = Connection)
             {
@@ -131,17 +131,14 @@ namespace Appointment_Core.Repositories
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        var appointments = new List<Appointment>();
+                        Appointment appointment = null;
                         while (reader.Read())
                         {
-                            var apptId = DbUtils.GetInt(reader, "AppId");
-
-                            var existingAppointment = appointments.FirstOrDefault(p => p.Id == apptId);
-                            if (existingAppointment == null)
+                            if (appointment == null)
                             {
-                                existingAppointment = new Appointment()
+                                appointment = new Appointment()
                                 {
-                                    Id = DbUtils.GetInt(reader, "AppId"),
+                                    Id = id,
                                     AppointmentDate = DbUtils.GetDateTime(reader, "AppointmentDate"),
                                     AppointmentCost = reader.GetDecimal(reader.GetOrdinal("AppointmentCost")),
                                     DentistId = DbUtils.GetInt(reader, "DentistId"),
@@ -162,11 +159,10 @@ namespace Appointment_Core.Repositories
                                     InsuranceTypes = new List<InsuranceType>()
 
                                 };
-                                appointments.Add(existingAppointment);
                             }
                             if (DbUtils.IsNotDbNull(reader, "InsuranceObjectId"))
                             {
-                                existingAppointment.Insurances.Add(new Insurance()
+                                appointment.Insurances.Add(new Insurance()
                                 {
                                     Id = DbUtils.GetInt(reader, "InsuranceObjectId"),
                                     InsuranceName = DbUtils.GetString(reader, "InsuranceName"),
@@ -181,7 +177,7 @@ namespace Appointment_Core.Repositories
                                 });
                             }
                         }
-                        return appointments;
+                        return appointment;
 
                     }
                 }

@@ -6,7 +6,7 @@ namespace Appointment_Core.Repositories
     public interface IAppointmentRepository
     {
         List<Appointment> GetAll();
-        List<Appointment> GetById(int id);
+        Appointment GetById(int id);
         void Add(Appointment appointment);
         void Delete(int id);
         void Update(Appointment appointment);
