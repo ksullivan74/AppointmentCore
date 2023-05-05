@@ -55,5 +55,48 @@ namespace Appointment_Core.Repositories
             }
         }
 
+        public Insurance GetById(int id)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                      SELECT *
+                        FROM Insurance
+                        WHERE Insurance.Id = @id
+                    ";
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        Insurance insurance = null;
+                        while (reader.Read())
+                        {
+                            if (insurance == null)
+                            {
+                                insurance = new Insurance()
+                                {
+                                    Id = id,
+                                    InsuranceName = DbUtils.GetString(reader, "InsuranceName"),
+                                    GroupName = DbUtils.GetString(reader, "GroupName"),
+                                    GroupNumber = DbUtils.GetString(reader, "GroupNumber"),
+                                    YearlyMax = DbUtils.GetInt(reader,"YearlyMax"),
+                                    PreventativeCoveragePercent = reader.GetDecimal(reader.GetOrdinal("PreventativeCoveragePercent")),
+                                    BasicCoveragePercent = reader.GetDecimal(reader.GetOrdinal("BasicCoveragePercent")),
+                                    MajorCoveragePercent = reader.GetDecimal(reader.GetOrdinal("MajorCoveragePercent")),
+                                    Deductible = DbUtils.GetInt(reader,"Deductible"),
+                                    IsDeleted = reader.GetBoolean(reader.GetOrdinal("IsDeleted"))
+
+                                };
+                            }
+                        }
+                        return insurance;
+
+                    }
+                }
+            }
+        }
     }
 }
