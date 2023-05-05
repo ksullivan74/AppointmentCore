@@ -31,7 +31,7 @@ const CreateAppointment = () => {
         <p className="text-left px-2">Upload a video</p>
         <CardBody>
           <div>
-            <h2>Upload a Video:</h2>
+            <h2>Book an Appointment:</h2>
             <fieldset>
               <div className="form-group">
                 <label htmlFor="Appointment Date"></label>
