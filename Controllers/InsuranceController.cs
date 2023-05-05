@@ -23,7 +23,7 @@ namespace Appointment_Core.Controllers
             return Ok(insurances);
         }
 
-        [HttpGet("Insurance/{id}")]
+        [HttpGet("InsuranceDetails/{id}")]
         public IActionResult GetInsurance(int id)
         {
             Insurance insurance = _insuranceRepository.GetById(id);

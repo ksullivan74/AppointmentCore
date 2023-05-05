@@ -10,12 +10,12 @@ const InsuranceObject = ({ insurance }) => {
     <Card>
       <h4>Insurance:</h4>
       <CardBody>
-        {/* <Link to={`/AdminUserList/UserDetails/${user.id}`}> */}
         <p className="text-left px-2">
           Insurance Name: {insurance.insuranceName}
         </p>
-        {/* </Link> */}
-        <p className="text-left px-2">Group Name: {insurance.groupName}</p>
+        <Link to={`/InsuranceList/InsuranceDetails/${insurance.id}`}>
+          <p className="text-left px-2">Group Name: {insurance.groupName}</p>
+        </Link>
         <div>
           <p>Insurance Status:</p>
           <p className="text-left px-2">

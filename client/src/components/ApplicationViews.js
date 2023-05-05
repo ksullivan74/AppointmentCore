@@ -6,6 +6,7 @@ import Register from "./Register";
 import AppointmetList from "./Appointments/AppointmentList";
 import InsuranceList from "./Insurance/InsuranceList";
 import AppointmentDetails from "./Appointments/AppointmentDetails";
+import InsuranceDetails from "./Insurance/InsuranceDetails";
 
 const ApplicationViews = ({ isLoggedIn, userProfile }) => {
   return (
@@ -25,7 +26,18 @@ const ApplicationViews = ({ isLoggedIn, userProfile }) => {
             }
           />
         </Route>
-        <Route path="InsuranceList" element={<InsuranceList />} />
+        <Route path="InsuranceList">
+          <Route
+            index
+            element={isLoggedIn ? <InsuranceList /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="InsuranceDetails/:id"
+            element={
+              isLoggedIn ? <InsuranceDetails /> : <Navigate to="/login" />
+            }
+          />
+        </Route>
       </Route>
     </Routes>
   );
