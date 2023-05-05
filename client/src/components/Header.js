@@ -43,13 +43,11 @@ export default function Header({ isLoggedIn, userProfile }) {
                     Insurances
                   </NavLink>
                 </NavItem>
-                {userProfile?.userTypeId === 1 && (
-                  <NavItem>
-                    <NavLink tag={RRNavLink} to="/">
-                      User Profiles
-                    </NavLink>
-                  </NavItem>
-                )}
+                <NavItem>
+                  <NavLink tag={RRNavLink} to="CreateAppointment">
+                    Make an Appointment
+                  </NavLink>
+                </NavItem>
                 <NavItem>
                   <a
                     aria-current="page"
