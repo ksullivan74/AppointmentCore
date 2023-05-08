@@ -22,6 +22,9 @@ namespace Appointment_Core.Models
         public Boolean IsDeleted { get; set; }
         public List<Insurance> Insurances { get; set; }
         public List<InsuranceType> InsuranceTypes { get; set; }
-        
+        public int InsuranceId {get; set; }
+        public int InsuranceTypeId { get; set; }
+        public List<int> InsuranceList { get; set; }
+
     }
 }

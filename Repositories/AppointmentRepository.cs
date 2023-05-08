@@ -183,7 +183,7 @@ namespace Appointment_Core.Repositories
                 }
             }
         }
-        public void Add(Appointment appointment)
+        public int Add(Appointment appointment)
         {
             using (var conn = Connection)
             {
@@ -204,6 +204,29 @@ namespace Appointment_Core.Repositories
                     DbUtils.AddParameter(cmd, "@IsDeleted", appointment.IsDeleted);
 
                     appointment.Id = (int)cmd.ExecuteScalar();
+                }
+                return appointment.Id;
+            }
+        }
+
+        public void AddInsuranceAppointment(InsuranceAppointment insuranceAppointment)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        INSERT INTO InsuranceAppointment 
+                        (AppointmentId, InsuranceId, InsuranceTypeId)
+                        OUTPUT INSERTED.ID
+                        VALUES (@AppointmentId, @InsuranceId, @InsuranceTypeId)
+                        ";
+                    DbUtils.AddParameter(cmd, "@AppointmentId", insuranceAppointment.AppointmentId);
+                    DbUtils.AddParameter(cmd, "@InsuranceId", insuranceAppointment.InsuranceId);
+                    DbUtils.AddParameter(cmd, "@InsuranceTypeId", insuranceAppointment.InsuranceTypeId);
+
+                   insuranceAppointment.Id = (int)cmd.ExecuteScalar();
                 }
             }
         }

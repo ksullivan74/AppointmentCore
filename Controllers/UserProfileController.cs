@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 using Appointment_Core.Repositories;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Appointment_Core.Controllers
 {

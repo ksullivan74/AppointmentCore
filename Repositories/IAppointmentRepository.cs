@@ -7,8 +7,9 @@ namespace Appointment_Core.Repositories
     {
         List<Appointment> GetAll();
         Appointment GetById(int id);
-        void Add(Appointment appointment);
+        int Add(Appointment appointment);
         void Delete(int id);
         void Update(Appointment appointment);
+        void AddInsuranceAppointment(InsuranceAppointment insuranceAppointment);
     }
 }

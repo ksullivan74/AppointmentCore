@@ -35,7 +35,10 @@ const ApplicationViews = ({ isLoggedIn, userProfile }) => {
             element={isLoggedIn ? <InsuranceDetails /> : <Navigate to="/" />}
           />
         </Route>
-        <Route path="CreateAppointment" element={<CreateAppointment />} />
+        <Route
+          path="CreateAppointment"
+          element={<CreateAppointment userProfile={userProfile} />}
+        />
       </Route>
     </Routes>
   );

@@ -44,8 +44,16 @@ namespace Appointment_Core.Controllers
             UserProfile user = GetCurrentUserProfile();
             appointment.UserProfileId = user.Id;
             appointment.IsDeleted = false;
-            _AppointmentRepository.Add(appointment);
-
+            int appointmentId = _AppointmentRepository.Add(appointment);
+            int counter = 1;
+            foreach (int insurance in appointment.InsuranceList)
+            {
+                InsuranceAppointment insuranceAppointment = new InsuranceAppointment();
+                insuranceAppointment.AppointmentId = appointmentId;
+                insuranceAppointment.InsuranceId = insurance;
+                insuranceAppointment.InsuranceTypeId = counter++;
+                _AppointmentRepository.AddInsuranceAppointment(insuranceAppointment);
+            }
             return Ok();
         }
 
@@ -55,8 +63,16 @@ namespace Appointment_Core.Controllers
             UserProfile user = GetCurrentUserProfile();
             appointment.UserProfileId = user.Id;
             appointment.IsDeleted = false;
-            _AppointmentRepository.Add(appointment);
-
+            int appointmentId =  _AppointmentRepository.Add(appointment);
+            int counter = 1;
+            foreach ( int insurance in appointment.InsuranceList)
+            {
+                InsuranceAppointment insuranceAppointment = new InsuranceAppointment();
+                insuranceAppointment.AppointmentId = appointmentId;
+                insuranceAppointment.InsuranceId = insurance;
+                insuranceAppointment.InsuranceTypeId = counter++;
+               _AppointmentRepository.AddInsuranceAppointment(insuranceAppointment);
+            }
             return Ok();
         }
 

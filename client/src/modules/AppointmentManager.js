@@ -45,6 +45,6 @@ export const addAppointment = (appointment) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(appointment),
-    }).then((resp) => resp.json())
+    })
   );
 };
