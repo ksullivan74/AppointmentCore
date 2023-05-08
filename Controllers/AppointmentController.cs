@@ -22,7 +22,9 @@ namespace Appointment_Core.Controllers
         [HttpGet]
         public IActionResult GetAllAppointments()
         {
-            List<Appointment> appointments = _AppointmentRepository.GetAll();
+            UserProfile user = GetCurrentUserProfile();
+            var id = user.Id;
+            List<Appointment> appointments = _AppointmentRepository.GetAll(id);
             return Ok(appointments);
         }
 

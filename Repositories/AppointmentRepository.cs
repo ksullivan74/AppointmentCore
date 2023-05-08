@@ -15,7 +15,7 @@ namespace Appointment_Core.Repositories
     public class AppointmentRepository : BaseRepository, IAppointmentRepository
     {
         public AppointmentRepository(IConfiguration configuration) : base(configuration) { }
-        public List<Appointment> GetAll()
+        public List<Appointment> GetAll(int id)
         {
             using (SqlConnection conn = Connection)
             {
@@ -39,7 +39,9 @@ namespace Appointment_Core.Repositories
                         LEFT JOIN InsuranceAppointment ON Appointment.Id = InsuranceAppointment.AppointmentId
                         LEFT JOIN Insurance on Insurance.Id = InsuranceAppointment.InsuranceId
                         LEFT JOIN InsuranceType on InsuranceType.id = InsuranceAppointment.InsuranceTypeId
+                        WHERE Appointment.UserProfileId = @id
                     ";
+                    cmd.Parameters.AddWithValue("@id", id);
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
