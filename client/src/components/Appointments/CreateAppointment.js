@@ -22,23 +22,28 @@ const CreateAppointment = () => {
     InsuranceList: [],
   });
 
-  const [insurances, setInsurances] = useState();
+  const [primaryinsurance, setPrimaryInsurances] = useState();
+  const [secnodaryinsurance, setSecondaryInsurances] = useState();
   const [dentists, setDentists] = useState();
 
   useEffect(() => {
-    getAllInsurances().then(setInsurances);
+    getAllInsurances().then(setPrimaryInsurances);
+  }, []);
+
+  useEffect(() => {
+    getAllInsurances().then(setSecondaryInsurances);
   }, []);
 
   useEffect(() => {
     getAllDentists().then(setDentists);
   }, []);
 
-  const handlesetAppointment = (evt) => {
+  const handlesetDentistandDate = (evt) => {
     const { name, value } = evt.target;
     setAppointment({ ...appointment, [name]: value });
   };
 
-  const handlesetAppointmentInsurance = (e) => {
+  const handlesetInsurance = (e) => {
     const value = parseInt(e.target.value);
     setAppointment({
       ...appointment,
@@ -60,7 +65,7 @@ const CreateAppointment = () => {
             key="Dentist"
             name="DentistId"
             value={appointment.DentistId}
-            onChange={handlesetAppointment}
+            onChange={handlesetDentistandDate}
           >
             <option>Choose Dentist</option>
             {dentists?.map((dentist) => {
@@ -74,10 +79,10 @@ const CreateAppointment = () => {
             key="Insurance"
             name="Primary"
             value={appointment.InsuranceList}
-            onChange={handlesetAppointmentInsurance}
+            onChange={handlesetInsurance}
           >
             <option>Choose Primary Insurance</option>
-            {insurances?.map((insurance) => {
+            {primaryinsurance?.map((insurance) => {
               return (
                 <option value={insurance.id}>{insurance.insuranceName}</option>
               );
@@ -90,10 +95,10 @@ const CreateAppointment = () => {
             key="Insurance"
             name="Secondary"
             value={appointment.InsuranceList}
-            onChange={handlesetAppointmentInsurance}
+            onChange={handlesetInsurance}
           >
             <option>Choose Primary Insurance</option>
-            {insurances?.map((insurance) => {
+            {secnodaryinsurance?.map((insurance) => {
               return (
                 <option value={insurance.id}>{insurance.insuranceName}</option>
               );
@@ -110,7 +115,7 @@ const CreateAppointment = () => {
             name="AppointmentDate"
             placeholder="Title"
             value={appointment.AppointmentDate}
-            onChange={handlesetAppointment}
+            onChange={handlesetDentistandDate}
           />
         </FormGroup>
         <FormGroup>
