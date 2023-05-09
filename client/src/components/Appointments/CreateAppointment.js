@@ -1,16 +1,7 @@
-import { useEffect, useState, useRef } from "react";
-import {
-  Card,
-  CardBody,
-  FormGroup,
-  Form,
-  Label,
-  Input,
-  Button,
-} from "reactstrap";
+import { useEffect, useState } from "react";
+import { FormGroup, Form, Label, Button } from "reactstrap";
 import { useNavigate } from "react-router-dom";
 import { addAppointment } from "../../modules/AppointmentManager";
-import ReactDatePicker from "react-datepicker";
 import { getAllInsurances } from "../../modules/InsuranceManager";
 import { getAllDentists } from "../../modules/DentistManager";
 
@@ -97,7 +88,9 @@ const CreateAppointment = () => {
           >
             <option>Choose Insurance</option>
             {insurances?.map((insurance) => {
-              return <option value={insurance.id}>{insurance.name}</option>;
+              return (
+                <option value={insurance.id}>{insurance.insuranceName}</option>
+              );
             })}
           </select>
           {/* options for insurance */}
@@ -121,7 +114,9 @@ const CreateAppointment = () => {
           >
             <option>Choose Insurance</option>
             {insurances?.map((insurance) => {
-              return <option value={insurance.id}>{insurance.name}</option>;
+              return (
+                <option value={insurance.id}>{insurance.insuranceName}</option>
+              );
             })}
           </select>
           {/* options for insurance */}
