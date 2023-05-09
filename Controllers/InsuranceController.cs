@@ -29,5 +29,13 @@ namespace Appointment_Core.Controllers
             Insurance insurance = _insuranceRepository.GetById(id);
             return Ok(insurance);
         }
+
+        [HttpPost]
+        public IActionResult Add(Insurance insurance)
+        {
+            insurance.IsDeleted = false;
+            _insuranceRepository.Add(insurance);
+            return Ok(insurance);
+        }
     }
 }

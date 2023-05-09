@@ -57,7 +57,7 @@ const CreateAppointment = () => {
 
   const handleCreateAppointment = (e) => {
     e.preventDefault();
-    addAppointment(appointment).then(() => navigate("/"));
+    addAppointment(appointment).then(() => navigate("/AppointmentList"));
   };
 
   return (

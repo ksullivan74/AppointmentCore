@@ -98,5 +98,31 @@ namespace Appointment_Core.Repositories
                 }
             }
         }
+
+        public void Add(Insurance insurance)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        INSERT INTO Insurance (InsuranceName, GroupName, GroupNumber, YearlyMax, PreventativeCoveragePercent, BasicCoveragePercent, MajorCoveragePercent, Deductible, IsDeleted)
+                        OUTPUT INSERTED.ID
+                        VALUES (@InsuranceName, @GroupName, @GroupNumber, @YearlyMax, @PreventativeCoveragePercent, @BasicCoveragePercent, @MajorCoveragePercent, @Deductible, @IsDeleted)";
+
+                    DbUtils.AddParameter(cmd, "@InsuranceName", insurance.InsuranceName);
+                    DbUtils.AddParameter(cmd, "@GroupName", insurance.GroupName);
+                    DbUtils.AddParameter(cmd, "@GroupNumber", insurance.GroupNumber);
+                    DbUtils.AddParameter(cmd, "@YearlyMax", insurance.YearlyMax);
+                    DbUtils.AddParameter(cmd, "@PreventativeCoveragePercent", insurance.PreventativeCoveragePercent);
+                    DbUtils.AddParameter(cmd, "@BasicCoveragePercent", insurance.BasicCoveragePercent);
+                    DbUtils.AddParameter(cmd, "@MajorCoveragePercent", insurance.MajorCoveragePercent);
+                    DbUtils.AddParameter(cmd, "@Deductible", insurance.Deductible);
+                    DbUtils.AddParameter(cmd, "@IsDeleted", insurance.IsDeleted);
+                    insurance.Id = (int)cmd.ExecuteScalar();
+                }
+            }
+        }
     }
 }
