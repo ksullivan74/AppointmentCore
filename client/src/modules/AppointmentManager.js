@@ -48,3 +48,16 @@ export const addAppointment = (appointment) => {
     })
   );
 };
+
+export const updateAppointment = (appointment, id) => {
+  return getToken().then((token) =>
+    fetch(`${baseUrl}/UpdateAppointmentDetails/${id}`, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(appointment),
+    })
+  );
+};
