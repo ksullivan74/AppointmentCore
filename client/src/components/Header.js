@@ -49,6 +49,11 @@ export default function Header({ isLoggedIn, userProfile }) {
                   </NavLink>
                 </NavItem>
                 <NavItem>
+                  <NavLink tag={RRNavLink} to="CreateInsurnace">
+                    Upload an Insurance
+                  </NavLink>
+                </NavItem>
+                <NavItem>
                   <a
                     aria-current="page"
                     className="nav-link"

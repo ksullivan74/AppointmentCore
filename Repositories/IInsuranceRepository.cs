@@ -7,5 +7,6 @@ namespace Appointment_Core.Repositories
     {
         List<Insurance> GetAll();
         Insurance GetById(int id);
+        void Add(Insurance insurance);
     }
 }
