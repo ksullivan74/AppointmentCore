@@ -245,7 +245,7 @@ namespace Appointment_Core.Repositories
                 }
             }
         }
-        public void Update(Appointment appointment)
+        public void Update(Appointment appointment,int id)
         {
             using (SqlConnection conn = Connection)
             {
@@ -255,19 +255,33 @@ namespace Appointment_Core.Repositories
                     cmd.CommandText = @"UPDATE Appointment
                                     SET 
                                         AppointmentDate = @AppointmentDate,
-                                        AppointmentCost = @AppointmentCost,
-                                        DentistId = @DentistId,
-                                        UserProfileId = @UserProfileId,
-                                        UserProfileId = @userProfileId,
-                                        IsDeleted = @IsDeleted,
+                                        DentistId = @DentistId
                                     WHERE Id = @id";
-                    DbUtils.AddParameter(cmd, "@AppointmentDate", appointment.AppointmentDate);
-                    DbUtils.AddParameter(cmd, "@AppointmentCost", appointment.AppointmentCost);
-                    DbUtils.AddParameter(cmd, "@DentistId", appointment.DentistId);
-                    DbUtils.AddParameter(cmd, "@UserProfileId", appointment.UserProfileId);
-                    DbUtils.AddParameter(cmd, "@IsDeleted", appointment.IsDeleted);
-                    cmd.Parameters.AddWithValue("@id", appointment.Id);
 
+                    DbUtils.AddParameter(cmd, "@AppointmentDate", appointment.AppointmentDate);
+                    DbUtils.AddParameter(cmd, "@DentistId", appointment.DentistId);
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void UpdateInsuranceAppointment(InsuranceAppointment insuranceAppointment, int id)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"UPDATE InsuranceAppointment
+                                        SET
+                                        InsuranceId = @InsuranceId
+                                        WHERE AppointmentId = @id AND InsuranceTypeId = @InsuranceTypeId";
+
+                    DbUtils.AddParameter(cmd, "@InsuranceId", insuranceAppointment.InsuranceId);
+                    DbUtils.AddParameter(cmd, "@InsuranceTypeId", insuranceAppointment.InsuranceTypeId);
+                    cmd.Parameters.AddWithValue("@id", id);
 
                     cmd.ExecuteNonQuery();
                 }

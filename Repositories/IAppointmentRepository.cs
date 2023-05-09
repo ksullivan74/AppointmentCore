@@ -9,8 +9,9 @@ namespace Appointment_Core.Repositories
         Appointment GetById(int id);
         int Add(Appointment appointment);
         void Delete(int id);
-        void Update(Appointment appointment);
+        void Update(Appointment appointment, int id);
         void AddInsuranceAppointment(InsuranceAppointment insuranceAppointment);
+        void UpdateInsuranceAppointment(InsuranceAppointment insuranceAppointment, int id);
         public List<InsuranceType> GetAllInsuraceTypes();
     }
 }

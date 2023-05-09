@@ -58,22 +58,18 @@ namespace Appointment_Core.Controllers
             return Ok();
         }
 
-        [HttpPost("AppointmentDetails/{id}")]
-        public IActionResult UpdateAppointment(Appointment appointment)
+        [HttpPut("UpdateAppointmentDetails/{id}")]
+        public IActionResult UpdateAppointment(Appointment appointment, int id)
         {
-            UserProfile user = GetCurrentUserProfile();
-            appointment.UserProfileId = user.Id;
-            appointment.IsDeleted = false;
-            int appointmentId =  _AppointmentRepository.Add(appointment);
-            int counter = 1;
-            foreach ( var insurance in appointment.InsuranceList)
+            _AppointmentRepository.Update(appointment, id);
+            foreach (Insurance insurance in appointment.InsuranceList)
             {
-                InsuranceAppointment insuranceAppointment = new InsuranceAppointment();
-                insuranceAppointment.AppointmentId = appointmentId;
-               // insuranceAppointment.InsuranceId = insurance;
-                insuranceAppointment.InsuranceTypeId = counter++;
-               _AppointmentRepository.AddInsuranceAppointment(insuranceAppointment);
+                var insuranceAppointment = new InsuranceAppointment();
+                insuranceAppointment.InsuranceId = insurance.InsuranceId;
+                insuranceAppointment.InsuranceTypeId = insurance.IsPrimary;
+                _AppointmentRepository.UpdateInsuranceAppointment(insuranceAppointment, id);
             }
+
             return Ok();
         }
 
