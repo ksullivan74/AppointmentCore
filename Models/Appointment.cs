@@ -24,7 +24,7 @@ namespace Appointment_Core.Models
         public List<InsuranceType> InsuranceTypes { get; set; }
         public int InsuranceId {get; set; }
         public int InsuranceTypeId { get; set; }
-        public List<int> InsuranceList { get; set; }
+        public List<Insurance> InsuranceList { get; set; }
 
     }
 }

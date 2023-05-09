@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
@@ -22,6 +23,8 @@ namespace Appointment_Core.Models
         public UserProfile UserProfile { get; set; }
         public Boolean IsDeleted { get; set; }
         public InsuranceType InsuranceType { get; set; }
+        public int InsuranceId { get; set; }
+        public int IsPrimary { get; set; }
 
 
 

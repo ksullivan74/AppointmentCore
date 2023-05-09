@@ -47,13 +47,12 @@ namespace Appointment_Core.Controllers
             appointment.UserProfileId = user.Id;
             appointment.IsDeleted = false;
             int appointmentId = _AppointmentRepository.Add(appointment);
-            int counter = 1;
-            foreach (int insurance in appointment.InsuranceList)
+            foreach (Insurance insurance in appointment.InsuranceList)
             {
-                InsuranceAppointment insuranceAppointment = new InsuranceAppointment();
+                var insuranceAppointment = new InsuranceAppointment();
                 insuranceAppointment.AppointmentId = appointmentId;
-                insuranceAppointment.InsuranceId = insurance;
-                insuranceAppointment.InsuranceTypeId = counter++;
+                insuranceAppointment.InsuranceId = insurance.InsuranceId;
+                insuranceAppointment.InsuranceTypeId = insurance.IsPrimary;
                 _AppointmentRepository.AddInsuranceAppointment(insuranceAppointment);
             }
             return Ok();
@@ -67,11 +66,11 @@ namespace Appointment_Core.Controllers
             appointment.IsDeleted = false;
             int appointmentId =  _AppointmentRepository.Add(appointment);
             int counter = 1;
-            foreach ( int insurance in appointment.InsuranceList)
+            foreach ( var insurance in appointment.InsuranceList)
             {
                 InsuranceAppointment insuranceAppointment = new InsuranceAppointment();
                 insuranceAppointment.AppointmentId = appointmentId;
-                insuranceAppointment.InsuranceId = insurance;
+               // insuranceAppointment.InsuranceId = insurance;
                 insuranceAppointment.InsuranceTypeId = counter++;
                _AppointmentRepository.AddInsuranceAppointment(insuranceAppointment);
             }

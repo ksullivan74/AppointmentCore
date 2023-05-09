@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
@@ -15,5 +16,6 @@ namespace Appointment_Core.Models
         public Appointment Appointment { get; set; }
         public Insurance Insurance { get; set; }
         public InsuranceType InsuranceType { get; set; }
+
     }
 }
