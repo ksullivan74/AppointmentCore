@@ -35,3 +35,20 @@ export const getInsurancesDetails = (id) => {
     });
   });
 };
+
+export const getAllInsuranceTypes = () => {
+  return getToken().then((token) => {
+    return fetch(`${baseUrl}/InsuranceTypes/`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then((resp) => {
+      if (resp.ok) {
+        return resp.json();
+      } else {
+        throw new Error("An unknown error occurred.");
+      }
+    });
+  });
+};

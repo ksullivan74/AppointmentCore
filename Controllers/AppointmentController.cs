@@ -78,6 +78,13 @@ namespace Appointment_Core.Controllers
             return Ok();
         }
 
+        [HttpGet("InsuranceTypes")]
+        public IActionResult GetAllInsuranceTypes()
+        {
+            List<InsuranceType> insuranceTypes = _AppointmentRepository.GetAllInsuraceTypes();
+            return Ok(insuranceTypes);
+        }
+
         private UserProfile GetCurrentUserProfile()
         {
             var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;

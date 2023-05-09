@@ -19,19 +19,22 @@ const CreateAppointment = () => {
   const [appointment, setAppointment] = useState({
     AppointmentDate: "",
     DentistId: 0,
-    InsuranceList: [],
+    InsuranceList: [
+      {
+        insuranceId: 0,
+        isPrimary: 1,
+      },
+      {
+        insuranceId: 0,
+        isPrimary: 2,
+      },
+    ],
   });
-
-  const [primaryinsurance, setPrimaryInsurances] = useState();
-  const [secnodaryinsurance, setSecondaryInsurances] = useState();
   const [dentists, setDentists] = useState();
+  const [insurances, setInsurances] = useState();
 
   useEffect(() => {
-    getAllInsurances().then(setPrimaryInsurances);
-  }, []);
-
-  useEffect(() => {
-    getAllInsurances().then(setSecondaryInsurances);
+    getAllInsurances().then(setInsurances);
   }, []);
 
   useEffect(() => {
@@ -43,12 +46,22 @@ const CreateAppointment = () => {
     setAppointment({ ...appointment, [name]: value });
   };
 
-  const handlesetInsurance = (e) => {
-    const value = parseInt(e.target.value);
-    setAppointment({
-      ...appointment,
-      InsuranceList: [...appointment.InsuranceList, value],
-    });
+  const handleInsuranceChange = (index, field, value) => {
+    // Copy the existing state of the appointment object
+    const updatedAppointment = { ...appointment };
+
+    // Convert isPrimary value to integer if needed
+    if (field === "isPrimary") {
+      value = value ? 1 : 2;
+    }
+
+    // Update the relevant insurance object in the InsuranceList array
+    const updatedInsurance = { ...updatedAppointment.InsuranceList[index] };
+    updatedInsurance[field] = value;
+    updatedAppointment.InsuranceList[index] = updatedInsurance;
+
+    // Set the updated state of the appointment object
+    setAppointment(updatedAppointment);
   };
 
   const handleCreateAppointment = (e) => {
@@ -73,38 +86,57 @@ const CreateAppointment = () => {
             })}
           </select>
         </FormGroup>
+
         <FormGroup>
-          <Label htmlFor="Primary Insurance"></Label>
+          {/* Dropdowns for selecting insurance and primary/secondary */}
           <select
-            key="Insurance"
-            name="Primary"
-            value={appointment.InsuranceList}
-            onChange={handlesetInsurance}
+            value={appointment.InsuranceList[0].insuranceId}
+            onChange={(e) =>
+              handleInsuranceChange(0, "insuranceId", e.target.value)
+            }
           >
-            <option>Choose Primary Insurance</option>
-            {primaryinsurance?.map((insurance) => {
-              return (
-                <option value={insurance.id}>{insurance.insuranceName}</option>
-              );
+            <option>Choose Insurance</option>
+            {insurances?.map((insurance) => {
+              return <option value={insurance.id}>{insurance.name}</option>;
             })}
           </select>
-        </FormGroup>
-        <FormGroup>
-          <Label htmlFor="Secondary Insurance"></Label>
+          {/* options for insurance */}
+          <Label htmlFor="primary-0">
+            Check if Primary:
+            <input
+              type="checkbox"
+              checked={appointment.InsuranceList[0].isPrimary === 1}
+              onChange={(e) =>
+                handleInsuranceChange(0, "isPrimary", e.target.checked)
+              }
+            />
+          </Label>
+
+          {/* Repeat for second insurance */}
           <select
-            key="Insurance"
-            name="Secondary"
-            value={appointment.InsuranceList}
-            onChange={handlesetInsurance}
+            value={appointment.InsuranceList[1].insuranceId}
+            onChange={(e) =>
+              handleInsuranceChange(1, "insuranceId", e.target.value)
+            }
           >
-            <option>Choose Primary Insurance</option>
-            {secnodaryinsurance?.map((insurance) => {
-              return (
-                <option value={insurance.id}>{insurance.insuranceName}</option>
-              );
+            <option>Choose Insurance</option>
+            {insurances?.map((insurance) => {
+              return <option value={insurance.id}>{insurance.name}</option>;
             })}
           </select>
+          {/* options for insurance */}
+          <Label>
+            Check if Primary:
+            <input
+              type="checkbox"
+              checked={appointment.InsuranceList[1].isPrimary === 1}
+              onChange={(e) =>
+                handleInsuranceChange(1, "isPrimary", e.target.checked)
+              }
+            />
+          </Label>
         </FormGroup>
+
         <FormGroup>
           <label htmlFor="Appointment Date"></label>
           <input
@@ -118,6 +150,7 @@ const CreateAppointment = () => {
             onChange={handlesetDentistandDate}
           />
         </FormGroup>
+
         <FormGroup>
           <Button>Book It!</Button>
         </FormGroup>

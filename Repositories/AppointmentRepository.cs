@@ -274,5 +274,39 @@ namespace Appointment_Core.Repositories
             }
         }
 
+        public List<InsuranceType> GetAllInsuraceTypes()
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                      SELECT *
+                        FROM InsuranceType
+                    ";
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        var types = new List<InsuranceType>();
+                        while (reader.Read())
+                        {
+                            types.Add(new InsuranceType()
+                            {
+                                Id = DbUtils.GetInt(reader, "Id"),
+                                Type = DbUtils.GetString(reader, "Type"),
+                                
+                            });
+                        }
+
+                        return types;
+
+                    }
+                }
+            }
+        }
+
+
+
     }
 }

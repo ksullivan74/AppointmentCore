@@ -11,5 +11,6 @@ namespace Appointment_Core.Repositories
         void Delete(int id);
         void Update(Appointment appointment);
         void AddInsuranceAppointment(InsuranceAppointment insuranceAppointment);
+        public List<InsuranceType> GetAllInsuraceTypes();
     }
 }
