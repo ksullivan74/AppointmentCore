@@ -65,3 +65,16 @@ export const addInsurance = (insurance) => {
     })
   );
 };
+
+export const updateInsurance = (insurance, id) => {
+  return getToken().then((token) =>
+    fetch(`${baseUrl}/InsuranceDetails/${id}`, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(insurance),
+    })
+  );
+};
