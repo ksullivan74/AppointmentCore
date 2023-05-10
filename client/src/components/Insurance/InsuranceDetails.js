@@ -3,7 +3,10 @@ import { useParams } from "react-router-dom";
 import { Button, Form, FormGroup, Label, Input, Card } from "reactstrap";
 import { useNavigate } from "react-router-dom";
 import { getInsurancesDetails } from "../../modules/InsuranceManager";
-import { updateInsurance } from "../../modules/InsuranceManager";
+import {
+  updateInsurance,
+  deleteInsurance,
+} from "../../modules/InsuranceManager";
 
 const InsuranceDetails = () => {
   const navigate = useNavigate();
@@ -29,6 +32,11 @@ const InsuranceDetails = () => {
       preventativeCoveragePercent,
     };
     updateInsurance(insurance, parseInt(id)).then(() => navigate("/"));
+  };
+
+  const handleDeleteInsurance = (e) => {
+    e.preventDefault();
+    deleteInsurance(parseInt(id)).then(() => navigate("/"));
   };
 
   return (
@@ -87,6 +95,9 @@ const InsuranceDetails = () => {
       </div>
       <FormGroup>
         <Button>Update</Button>
+      </FormGroup>
+      <FormGroup>
+        <Button onClick={handleDeleteInsurance}>Delete Insurance</Button>
       </FormGroup>
     </Form>
   );

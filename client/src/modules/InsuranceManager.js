@@ -78,3 +78,15 @@ export const updateInsurance = (insurance, id) => {
     })
   );
 };
+
+export const deleteInsurance = (id) => {
+  return getToken().then((token) =>
+    fetch(`${baseUrl}/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        // "Content-Type": "application/json",
+      },
+    })
+  );
+};

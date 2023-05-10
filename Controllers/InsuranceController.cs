@@ -44,5 +44,12 @@ namespace Appointment_Core.Controllers
             _insuranceRepository.Update(insurance, id);
             return Ok();
         }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteInsurance(int id)
+        {
+            _insuranceRepository.Delete(id);
+            return Ok();
+        }
     }
 }
