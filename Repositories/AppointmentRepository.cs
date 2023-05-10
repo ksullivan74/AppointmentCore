@@ -39,7 +39,7 @@ namespace Appointment_Core.Repositories
                         LEFT JOIN InsuranceAppointment ON Appointment.Id = InsuranceAppointment.AppointmentId
                         LEFT JOIN Insurance on Insurance.Id = InsuranceAppointment.InsuranceId
                         LEFT JOIN InsuranceType on InsuranceType.id = InsuranceAppointment.InsuranceTypeId
-                        WHERE Appointment.UserProfileId = @id
+                        WHERE Appointment.UserProfileId = @id AND Appointment.IsDeleted = 0
                     ";
                     cmd.Parameters.AddWithValue("@id", id);
 
@@ -239,7 +239,10 @@ namespace Appointment_Core.Repositories
                 conn.Open();
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @" DELETE FROM Post WHERE Id = @id";
+                    cmd.CommandText = @"UPDATE Appointment
+                                        SET 
+                                        IsDeleted = 1
+                                    WHERE Id = @id";
                     cmd.Parameters.AddWithValue("@id", id);
                     cmd.ExecuteNonQuery();
                 }

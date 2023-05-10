@@ -13,7 +13,10 @@ import { useNavigate } from "react-router-dom";
 import { getAppointmentDetails } from "../../modules/AppointmentManager";
 import { getAllDentists } from "../../modules/DentistManager";
 import { getAllInsurances } from "../../modules/InsuranceManager";
-import { updateAppointment } from "../../modules/AppointmentManager";
+import {
+  updateAppointment,
+  deleteAppointment,
+} from "../../modules/AppointmentManager";
 
 const AppointmentDetails = () => {
   const navigate = useNavigate();
@@ -139,6 +142,11 @@ const AppointmentDetails = () => {
     setUpdatedAppointment({ ...updatedAppointment, [name]: value });
   };
 
+  const handleDeleteAppointment = (e) => {
+    e.preventDefault();
+    deleteAppointment(parseInt(id)).then(() => navigate("/AppointmentList"));
+  };
+
   return (
     <Card>
       <h2 className="text-left px-2">
@@ -257,6 +265,11 @@ const AppointmentDetails = () => {
           </FormGroup>
           <FormGroup>
             <Button>Update</Button>
+          </FormGroup>
+        </Form>
+        <Form onSubmit={handleDeleteAppointment}>
+          <FormGroup>
+            <Button>Delete Appointment</Button>
           </FormGroup>
         </Form>
       </CardBody>

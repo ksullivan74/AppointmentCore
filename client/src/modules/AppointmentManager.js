@@ -61,3 +61,15 @@ export const updateAppointment = (appointment, id) => {
     })
   );
 };
+
+export const deleteAppointment = (id) => {
+  return getToken().then((token) =>
+    fetch(`${baseUrl}/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        // "Content-Type": "application/json",
+      },
+    })
+  );
+};

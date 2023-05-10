@@ -80,6 +80,13 @@ namespace Appointment_Core.Controllers
             return Ok(insuranceTypes);
         }
 
+        [HttpDelete("{id}")]
+        public IActionResult DeleteAppointment(int id)
+        {
+            _AppointmentRepository.Delete(id);
+            return Ok();
+        }
+
         private UserProfile GetCurrentUserProfile()
         {
             var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
