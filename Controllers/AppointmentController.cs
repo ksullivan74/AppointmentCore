@@ -46,6 +46,7 @@ namespace Appointment_Core.Controllers
             UserProfile user = GetCurrentUserProfile();
             appointment.UserProfileId = user.Id;
             appointment.IsDeleted = false;
+            appointment.AppointmentCost = 150;
             int appointmentId = _AppointmentRepository.Add(appointment);
             foreach (Insurance insurance in appointment.InsuranceList)
             {
