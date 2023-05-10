@@ -37,5 +37,12 @@ namespace Appointment_Core.Controllers
             _insuranceRepository.Add(insurance);
             return Ok(insurance);
         }
+
+        [HttpPut("InsuranceDetails/{id}")]
+        public IActionResult Update(Insurance insurance, int id)
+        {
+            _insuranceRepository.Update(insurance, id);
+            return Ok();
+        }
     }
 }

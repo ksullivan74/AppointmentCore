@@ -8,5 +8,6 @@ namespace Appointment_Core.Repositories
         List<Insurance> GetAll();
         Insurance GetById(int id);
         void Add(Insurance insurance);
+        void Update(Insurance insurance, int id);
     }
 }

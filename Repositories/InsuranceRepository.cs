@@ -124,5 +124,31 @@ namespace Appointment_Core.Repositories
                 }
             }
         }
+
+        public void Update(Insurance insurance, int id)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"UPDATE Insurance
+                                    SET 
+                                        YearlyMax = @YearlyMax,
+                                        GroupName = @GroupName,
+                                        GroupNumber = @GroupNumber,
+                                        PreventativeCoveragePercent = @PreventativeCoveragePercent
+                                    WHERE Id = @id";
+
+                    DbUtils.AddParameter(cmd, "@YearlyMax", insurance.YearlyMax);
+                    DbUtils.AddParameter(cmd, "@GroupName", insurance.GroupName);
+                    DbUtils.AddParameter(cmd, "@GroupNumber", insurance.GroupNumber);
+                    DbUtils.AddParameter(cmd, "@PreventativeCoveragePercent", insurance.PreventativeCoveragePercent);
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }
