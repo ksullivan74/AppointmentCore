@@ -77,7 +77,7 @@ const CreateInsurance = () => {
           <Label htmlFor="Insurance-PreventativeCoveragePercent">
             Preventative Coverage Percent:
             <input
-              type="text"
+              type="number"
               value={PreventativeCoveragePercent}
               onChange={(e) => setPreventativeCoveragePercent(e.target.value)}
             />
@@ -87,7 +87,7 @@ const CreateInsurance = () => {
           <Label htmlFor="Insurance-BasicCoveragePercent">
             Basic Coverag Percent:
             <input
-              type="text"
+              type="number"
               value={BasicCoveragePercent}
               onChange={(e) => setBasicCoveragePercent(e.target.value)}
             />
@@ -97,7 +97,7 @@ const CreateInsurance = () => {
           <Label htmlFor="Insurance-MajorCoveragePercent">
             Major Coverage Percent:
             <input
-              type="text"
+              type="number"
               value={MajorCoveragePercent}
               onChange={(e) => setMajorCoveragePercent(e.target.value)}
             />
