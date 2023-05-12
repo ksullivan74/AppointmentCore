@@ -47,6 +47,7 @@ const InsuranceDetails = () => {
           <h4>Group Name: {insurance?.groupName}</h4>
           <Label>
             Update Group Name:
+            <br />
             <input type="text" onChange={(e) => setGroupName(e.target.value)} />
           </Label>
         </FormGroup>
@@ -54,6 +55,7 @@ const InsuranceDetails = () => {
           <h4>Group Number: {insurance?.groupNumber}</h4>
           <Label>
             Update Group Number:
+            <br />
             <input
               type="text"
               onChange={(e) => setGroupNumber(e.target.value)}

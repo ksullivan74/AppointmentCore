@@ -191,32 +191,34 @@ const AppointmentDetails = () => {
           <p className="text-left px-2">Update Insurance Below:</p>
           <FormGroup>
             {/* Dropdowns for selecting insurance and primary/secondary */}
-            <select
-              value={updatedAppointment.InsuranceList[0].insuranceId}
-              onChange={(e) =>
-                handleInsuranceChange(0, "insuranceId", e.target.value)
-              }
-            >
-              <option>Choose Insurance</option>
-              {insurances?.map((insurance) => {
-                return (
-                  <option value={insurance.id}>
-                    {insurance.insuranceName}
-                  </option>
-                );
-              })}
-            </select>
-            {/* options for insurance */}
-            <Label htmlFor="primary-0">
-              Check if Primary:
-              <input
-                type="checkbox"
-                checked={updatedAppointment.InsuranceList[0].isPrimary === 1}
+            <div>
+              <select
+                value={updatedAppointment.InsuranceList[0].insuranceId}
                 onChange={(e) =>
-                  handleInsuranceChange(0, "isPrimary", e.target.checked)
+                  handleInsuranceChange(0, "insuranceId", e.target.value)
                 }
-              />
-            </Label>
+              >
+                <option>Choose Insurance</option>
+                {insurances?.map((insurance) => {
+                  return (
+                    <option value={insurance.id}>
+                      {insurance.insuranceName}
+                    </option>
+                  );
+                })}
+              </select>
+              {/* options for insurance */}
+              <Label htmlFor="primary-0">
+                Check if Primary:
+                <input
+                  type="checkbox"
+                  checked={updatedAppointment.InsuranceList[0].isPrimary === 1}
+                  onChange={(e) =>
+                    handleInsuranceChange(0, "isPrimary", e.target.checked)
+                  }
+                />
+              </Label>
+            </div>
 
             {/* Repeat for second insurance */}
             <select
